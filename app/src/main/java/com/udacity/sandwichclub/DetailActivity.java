@@ -13,6 +13,8 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 
 import org.json.JSONException;
 
+import java.util.List;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
@@ -66,15 +68,27 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI(Sandwich sandwich) {
         TextView alsoKnownAs = findViewById(R.id.also_known_tv);
-        alsoKnownAs.setText(sandwich.getAlsoKnownAs().toString());
+        alsoKnownAs.setText(arrayListToStr(sandwich.getAlsoKnownAs()));
 
         TextView description = findViewById(R.id.description_tv);
         description.setText(sandwich.getDescription());
 
-        TextView ingridients = findViewById(R.id.ingredients_tv);
-        ingridients.setText(sandwich.getIngredients().toString());
+        TextView ingredients = findViewById(R.id.ingredients_tv);
+        ingredients.setText(arrayListToStr(sandwich.getIngredients()));
 
         TextView origin = findViewById(R.id.origin_tv);
         origin.setText(sandwich.getPlaceOfOrigin());
+    }
+
+    private String listToStr(List<String> list) {
+        String result = "";
+        if (list.size() != 0) {
+            for (String item : list) {
+                result = result + ", " + item;
+            }
+
+            return result.substring(2);
+        }
+        return result;
     }
 }
