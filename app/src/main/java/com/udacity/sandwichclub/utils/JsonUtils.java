@@ -23,33 +23,33 @@ public class JsonUtils {
         */
 
         // Getting mainName
-        String mainName = jsonObject.getJSONObject("name").getString("mainName");
+        String mainName = jsonObject.optJSONObject("name").optString("mainName", "N/A");
         //Log.i(TAG, "parseSandwichJson: mainName is " + mainName);
 
         // Getting alsoKnownAs list
-        JSONArray alsoKnownAsJsonArray = jsonObject.getJSONObject("name").getJSONArray("alsoKnownAs");
+        JSONArray alsoKnownAsJsonArray = jsonObject.optJSONObject("name").optJSONArray("alsoKnownAs");
         ArrayList<String> alsoKnownAs = new ArrayList<>();
         if (alsoKnownAsJsonArray != null) {
             for (int i = 0; i < alsoKnownAsJsonArray.length(); i++) {
-                alsoKnownAs.add(alsoKnownAsJsonArray.getString(i).toString());
+                alsoKnownAs.add(alsoKnownAsJsonArray.optString(i, "N/A").toString());
             }
         }
 
-        // Getiing placeOfOrigin
-        String placeOfOrigin = jsonObject.getString("placeOfOrigin");
+        // Getting placeOfOrigin
+        String placeOfOrigin = jsonObject.optString("placeOfOrigin", "N/A");
 
         // Getting description
-        String description = jsonObject.getString("description");
+        String description = jsonObject.optString("description", "N/A");
 
         // Getting image
-        String image = jsonObject.getString("image");
+        String image = jsonObject.optString("image", "N/A");
 
         // Getting ingredients list
-        JSONArray ingredientsJsonArray = jsonObject.getJSONArray("ingredients");
+        JSONArray ingredientsJsonArray = jsonObject.optJSONArray("ingredients");
         ArrayList<String> ingredients = new ArrayList<>();
         if (ingredientsJsonArray != null) {
             for (int i = 0; i < ingredientsJsonArray.length(); i++) {
-                ingredients.add(ingredientsJsonArray.get(i).toString());
+                ingredients.add(ingredientsJsonArray.optString(i, "N/A").toString());
             }
         }
 
